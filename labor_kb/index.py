@@ -104,8 +104,16 @@ class KnowledgeBase:
                 )
 
     def _excluded(self, path: Path) -> bool:
+        """'/정규식/' 형태는 경로의 각 폴더·파일 이름에 정규식으로, 나머지는 경로 전체에 글자 포함으로 검사한다."""
         text = path.as_posix()
-        return any(pattern in text for pattern in self.exclude)
+        for pattern in self.exclude:
+            if len(pattern) > 2 and pattern.startswith("/") and pattern.endswith("/"):
+                regex = re.compile(pattern[1:-1])
+                if any(regex.search(part) for part in path.parts):
+                    return True
+            elif pattern in text:
+                return True
+        return False
 
     def _load_cached(self, path: Path, rel: str, progress: Callable[[str], None]) -> list[str]:
         stat = path.stat()
