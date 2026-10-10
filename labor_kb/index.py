@@ -48,8 +48,10 @@ def tokenize(text: str) -> list[str]:
 
 
 class KnowledgeBase:
-    def __init__(self, docs_dirs: Path | list[Path], cache_dir: Path):
-        """docs_dirs: 자료 폴더 하나 또는 여러 개(예: 로컬 자료 폴더 + 구글드라이브 동기화 폴더)."""
+    def __init__(self, docs_dirs: Path | list[Path], cache_dir: Path, exclude: list[str] | None = None):
+        """docs_dirs: 자료 폴더 하나 또는 여러 개(예: 로컬 자료 폴더 + 구글드라이브 동기화 폴더).
+        exclude: 경로에 이 글자가 들어간 파일·폴더는 읽지 않는다(예: 구판 자료)."""
+        self.exclude = list(exclude or [])
         if isinstance(docs_dirs, (str, Path)):
             docs_dirs = [docs_dirs]
         self.docs_dirs = [Path(d).expanduser() for d in docs_dirs]
@@ -80,7 +82,8 @@ class KnowledgeBase:
     def _build_dir(self, docs_dir: Path, label: str, progress: Callable[[str], None]) -> None:
         files = sorted(
             p for p in docs_dir.rglob("*")
-            if p.is_file() and p.suffix.lower() in SUPPORTED_EXTS and not p.name.startswith(("~$", "."))
+            if p.is_file() and p.suffix.lower() in SUPPORTED_EXTS
+            and not p.name.startswith(("~$", ".")) and not self._excluded(p)
         )
         for path in files:
             rel = label + path.relative_to(docs_dir).as_posix()
@@ -89,18 +92,20 @@ class KnowledgeBase:
             except Exception as e:
                 self.warnings.append(f"{rel}: 읽기 실패 ({e})")
                 continue
-            if sum(len(p) for p in pages) / max(1, len(pages)) < 30:  # 쪽당 평균 30자 미만
+            if path.suffix.lower() == ".pdf" and sum(len(p) for p in pages) / max(1, len(pages)) < 30:
                 self.warnings.append(f"{rel}: 추출된 글자가 거의 없습니다. 스캔본(이미지) PDF일 수 있습니다.")
             self.pages[rel] = pages
 
         for path in docs_dir.rglob("*"):
             ext = path.suffix.lower()
-            if ext == ".hwp":
-                self.warnings.append(f"{path.name}: HWP는 지원하지 않습니다. PDF 또는 HWPX로 저장해 주세요.")
-            elif ext in (".gdoc", ".gsheet", ".gslides"):
+            if ext in (".gdoc", ".gsheet", ".gslides") and not self._excluded(path):
                 self.warnings.append(
                     f"{path.name}: 구글 문서 바로가기는 읽을 수 없습니다. 드라이브에서 PDF/DOCX로 다운로드해 넣어 주세요."
                 )
+
+    def _excluded(self, path: Path) -> bool:
+        text = path.as_posix()
+        return any(pattern in text for pattern in self.exclude)
 
     def _load_cached(self, path: Path, rel: str, progress: Callable[[str], None]) -> list[str]:
         stat = path.stat()

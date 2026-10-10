@@ -7,13 +7,14 @@
 from pathlib import Path
 
 from labor_kb import KnowledgeBase, LaborAdvisor
-from labor_kb.config import docs_dirs
+from labor_kb import config
 
 BASE = Path(__file__).resolve().parent
 
 
 def main() -> None:
-    kb = KnowledgeBase(docs_dirs(BASE), BASE / ".index")
+    dirs, exclude = config.load(BASE)
+    kb = KnowledgeBase(dirs, BASE / ".index", exclude=exclude)
     print("📚 자료를 확인하는 중...")
     kb.build()
     print(kb.summary())

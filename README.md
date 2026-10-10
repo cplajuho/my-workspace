@@ -30,8 +30,8 @@ export ANTHROPIC_API_KEY="sk-ant-..."
 | 형식 | 지원 |
 |---|---|
 | PDF (텍스트 PDF) | ✅ 쪽 번호까지 인용 |
-| DOCX, HWPX, TXT, MD | ✅ |
-| HWP (구 한글) | ❌ → 한글에서 PDF 또는 HWPX로 저장 |
+| DOCX, TXT, MD | ✅ |
+| HWP, HWPX (한글) | ✅ (배포용·암호 문서는 ❌ → PDF로 저장) |
 | 스캔본 PDF (이미지) | ❌ → OCR 처리 후 넣기 |
 
 **자료는 계속 추가/수정해도 됩니다.** 다음 실행(또는 `/재색인`, 웹 화면의 "자료 다시 읽기") 때
@@ -45,6 +45,11 @@ export ANTHROPIC_API_KEY="sk-ant-..."
 
 드라이브에 파일을 추가하면 PC에 자동 동기화되고, 다음 실행 때 반영됩니다.
 구글 문서(.gdoc) 형식은 읽을 수 없으니 PDF/DOCX로 다운로드해 넣어 주세요.
+
+### 특정 자료 빼기
+
+`자료폴더.txt`에 `제외: 글자` 줄을 넣으면 경로에 그 글자가 들어간 파일·폴더는 읽지 않습니다.
+기본으로 개별노동법실무 2025년판(`2025버전`, `개별노동법실무(2025)`)은 빼 두었습니다.
 
 ## 3. 실행
 
@@ -68,7 +73,7 @@ python 상담.py
 상담.py              터미널 상담
 app.py               웹 상담 화면 (Streamlit)
 labor_kb/
-  loader.py          PDF·DOCX·HWPX·TXT 텍스트 추출
+  loader.py          PDF·DOCX·HWP·HWPX·TXT 텍스트 추출
   index.py           자료 색인(캐시) + 한글 검색(BM25)
   advisor.py         노무사 페르소나 프롬프트 + Claude 호출
   config.py          자료 폴더 설정 읽기
