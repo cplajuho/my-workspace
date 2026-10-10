@@ -5,6 +5,7 @@ from pathlib import Path
 import streamlit as st
 
 from labor_kb import KnowledgeBase, LaborAdvisor
+from labor_kb.config import docs_dirs
 
 BASE = Path(__file__).resolve().parent
 
@@ -13,7 +14,7 @@ st.set_page_config(page_title="노동법지식in", page_icon="⚖️", layout="w
 
 @st.cache_resource(show_spinner="자료를 읽는 중입니다... (처음 한 번만 오래 걸립니다)")
 def load_kb() -> KnowledgeBase:
-    kb = KnowledgeBase(BASE / "자료", BASE / ".index")
+    kb = KnowledgeBase(docs_dirs(BASE), BASE / ".index")
     kb.build(progress=lambda _: None)
     return kb
 

@@ -48,8 +48,11 @@ def tokenize(text: str) -> list[str]:
 
 
 class KnowledgeBase:
-    def __init__(self, docs_dir: Path, cache_dir: Path):
-        self.docs_dir = Path(docs_dir)
+    def __init__(self, docs_dirs: Path | list[Path], cache_dir: Path):
+        """docs_dirs: 자료 폴더 하나 또는 여러 개(예: 로컬 자료 폴더 + 구글드라이브 동기화 폴더)."""
+        if isinstance(docs_dirs, (str, Path)):
+            docs_dirs = [docs_dirs]
+        self.docs_dirs = [Path(d).expanduser() for d in docs_dirs]
         self.cache_dir = Path(cache_dir)
         self.pages: dict[str, list[str]] = {}
         self.chunks: list[Chunk] = []
@@ -60,16 +63,27 @@ class KnowledgeBase:
 
     # ------------------------------------------------------------------ 색인
     def build(self, progress: Callable[[str], None] = print) -> None:
-        self.docs_dir.mkdir(parents=True, exist_ok=True)
         self.cache_dir.mkdir(parents=True, exist_ok=True)
+        self.docs_dirs[0].mkdir(parents=True, exist_ok=True)
         self.pages, self.warnings = {}, []
 
+        for docs_dir in self.docs_dirs:
+            if not docs_dir.is_dir():
+                self.warnings.append(f"{docs_dir}: 폴더를 찾을 수 없습니다. 경로를 확인해 주세요.")
+                continue
+            # 첫 번째(기본) 폴더는 파일 이름 그대로, 추가 폴더는 '폴더이름/파일' 로 표시
+            label = "" if docs_dir == self.docs_dirs[0] else docs_dir.name + "/"
+            self._build_dir(docs_dir, label, progress)
+
+        self._build_bm25()
+
+    def _build_dir(self, docs_dir: Path, label: str, progress: Callable[[str], None]) -> None:
         files = sorted(
-            p for p in self.docs_dir.rglob("*")
+            p for p in docs_dir.rglob("*")
             if p.is_file() and p.suffix.lower() in SUPPORTED_EXTS and not p.name.startswith(("~$", "."))
         )
         for path in files:
-            rel = path.relative_to(self.docs_dir).as_posix()
+            rel = label + path.relative_to(docs_dir).as_posix()
             try:
                 pages = self._load_cached(path, rel, progress)
             except Exception as e:
@@ -79,14 +93,18 @@ class KnowledgeBase:
                 self.warnings.append(f"{rel}: 추출된 글자가 거의 없습니다. 스캔본(이미지) PDF일 수 있습니다.")
             self.pages[rel] = pages
 
-        for path in self.docs_dir.rglob("*.hwp"):
-            self.warnings.append(f"{path.name}: HWP는 지원하지 않습니다. PDF 또는 HWPX로 저장해 주세요.")
-
-        self._build_bm25()
+        for path in docs_dir.rglob("*"):
+            ext = path.suffix.lower()
+            if ext == ".hwp":
+                self.warnings.append(f"{path.name}: HWP는 지원하지 않습니다. PDF 또는 HWPX로 저장해 주세요.")
+            elif ext in (".gdoc", ".gsheet", ".gslides"):
+                self.warnings.append(
+                    f"{path.name}: 구글 문서 바로가기는 읽을 수 없습니다. 드라이브에서 PDF/DOCX로 다운로드해 넣어 주세요."
+                )
 
     def _load_cached(self, path: Path, rel: str, progress: Callable[[str], None]) -> list[str]:
         stat = path.stat()
-        key = hashlib.sha1(rel.encode()).hexdigest()
+        key = hashlib.sha1(str(path.resolve()).encode()).hexdigest()
         cache_file = self.cache_dir / f"{key}.json"
         if cache_file.exists():
             cached = json.loads(cache_file.read_text(encoding="utf-8"))
