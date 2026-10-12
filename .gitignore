@@ -7,3 +7,5 @@ __pycache__/
 !자료/여기에_자료를_넣으세요.txt
 자료폴더.txt
 .venv/
+*.whl
+*.tar.gz
