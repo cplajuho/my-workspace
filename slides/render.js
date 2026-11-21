@@ -198,7 +198,11 @@ const tpl = {
     ${d.caption ? `<div class="cap" style="margin-top:56px">${rich(d.caption)}</div>` : ''}`,
 };
 
+const PREM = require('./premium.js')({ esc, rich, PROFILE, url });
+let TOTAL = 0;
+
 function contentSlide(d, idx) {
+  if (PREM.T[d.type]) return PREM.frame(d, idx + 1, TOTAL, PREM.T[d.type](d));
   if (d.type === 'photo') {
     return `<div class="slide"><div class="ph" style="background-image:url('${url(d.image)}')"></div>
       <div class="ph-text"><div class="head">${rich(d.head)}</div>${d.caption ? `<div class="cap" style="color:#eadfcc">${rich(d.caption)}</div>` : ''}</div></div>`;
@@ -221,12 +225,13 @@ async function main() {
   fs.mkdirSync(outDir, { recursive: true });
 
   const th = coverOf(spec.theme);
+  TOTAL = spec.slides.length + 2;
   const pages = [th.cover(spec.cover), ...spec.slides.map((s, i) => contentSlide(s, i + 1)), th.closing({ font: spec.cover.font, ...(spec.closing || {}) })];
   const browser = await chromium.launch();
   const page = await browser.newPage({ viewport: { width: SIZE, height: SIZE }, deviceScaleFactor: spec.scale || 1 });
   for (let i = 0; i < pages.length; i++) {
     const file = path.join(outDir, `_tmp.html`);
-    fs.writeFileSync(file, `<!doctype html><html lang="ko"><head><meta charset="utf-8"><style>${css}${THEMES.css}</style></head><body>${pages[i]}</body></html>`);
+    fs.writeFileSync(file, `<!doctype html><html lang="ko"><head><meta charset="utf-8"><style>${css}${THEMES.css}${PREM.css}</style></head><body>${pages[i]}</body></html>`);
     await page.goto('file://' + file);
     await page.evaluate(() => document.fonts.ready);
     const out = path.join(outDir, `${String(i + 1).padStart(2, '0')}.png`);

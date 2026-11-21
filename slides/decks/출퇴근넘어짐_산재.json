@@ -7,126 +7,198 @@
   },
   "slides": [
     {
-      "type": "statement",
+      "type": "p-hero",
       "topic": "핵심 결론",
-      "emoji": "🚶",
-      "head": "걸어서 출근해도\n[[산재]] 됩니다",
-      "caption": "도보·버스·지하철·자전거·자가용 모두"
+      "head": "걸어서 출근해도\n[[산재]]입니다",
+      "items": [
+        {
+          "icon": "walk",
+          "label": "도보"
+        },
+        {
+          "icon": "bus",
+          "label": "버스"
+        },
+        {
+          "icon": "train",
+          "label": "지하철"
+        },
+        {
+          "icon": "bike",
+          "label": "자전거"
+        },
+        {
+          "icon": "car",
+          "label": "자가용"
+        }
+      ],
+      "caption": "통상적인 경로와 방법이라면 수단은 가리지 않습니다\n「산재보험법」 제37조 제1항 제3호"
     },
     {
-      "type": "compare",
+      "type": "p-route",
       "topic": "같은 넘어짐, 다른 결과",
       "head": "어디서 넘어졌나요?",
-      "items": [
+      "y": 600,
+      "start": {
+        "icon": "home",
+        "label": "집"
+      },
+      "end": {
+        "icon": "office",
+        "label": "회사"
+      },
+      "marks": [
         {
-          "ok": true,
-          "emoji": "🧊",
+          "at": 0.3,
+          "icon": "ice",
           "label": "출근길 빙판",
-          "text": "평소 다니는 길"
-        },
-        {
-          "ok": false,
-          "emoji": "🍻",
-          "label": "술자리 후 귀갓길",
-          "text": "경로를 벗어남"
+          "sub": "인정"
         }
-      ]
+      ],
+      "branch": {
+        "at": 0.58,
+        "icon": "beer",
+        "label": "술자리 후 귀갓길",
+        "sub": "경로 이탈 → 불인정"
+      }
     },
     {
-      "type": "statement",
+      "type": "p-scope",
       "topic": "출퇴근의 시작점",
-      "emoji": "🚪",
-      "head": "아파트 [[현관문]] 밖부터\n출근입니다",
-      "caption": "공용계단·엘리베이터 앞 사고도 인정 여지"
-    },
-    {
-      "type": "checklist",
-      "topic": "인정 안 되는 경우",
-      "head": "이럴 땐 [[어려워요]]",
-      "mark": "x",
-      "items": [
+      "head": "현관문을 나서는 순간\n[[출근]]이 시작됩니다",
+      "headTop": 150,
+      "zones": [
         {
-          "emoji": "🍻",
-          "label": "경로를 벗어나거나 멈춤",
-          "text": "술자리, 개인 약속 등"
+          "icon": "home",
+          "label": "집 안\n(제외)",
+          "state": "no",
+          "w": 1
         },
         {
-          "emoji": "🛴",
-          "label": "범죄행위가 원인",
-          "text": "킥보드·자전거 음주운전 등"
+          "icon": "stairs",
+          "label": "공용계단\n엘리베이터",
+          "w": 1.15
         },
         {
-          "emoji": "🏖️",
-          "label": "출퇴근과 무관한 이동",
-          "text": "쉬는 날 개인 용무"
+          "icon": "walk",
+          "label": "도로·\n대중교통",
+          "w": 1.15
+        },
+        {
+          "icon": "office",
+          "label": "회사",
+          "w": 0.9
         }
-      ]
+      ],
+      "door": {
+        "icon": "door",
+        "label": "현관문"
+      },
+      "bracket": "출퇴근 재해 보호 구간",
+      "capTop": 370,
+      "caption": "아파트 공용부분에서 넘어져도 인정될 여지가 있습니다"
     },
     {
-      "type": "compare",
-      "topic": "예외 인정",
-      "head": "장보기·병원은 [[예외]]",
+      "type": "p-cards",
+      "topic": "인정 안 되는 경우",
+      "head": "이럴 땐 [[어렵습니다]]",
+      "top": 380,
       "items": [
         {
           "ok": false,
-          "emoji": "🛒",
-          "label": "마트 안에서",
-          "text": "볼일 보는 도중"
+          "icon": "beer",
+          "label": "경로 이탈·중단",
+          "text": "술자리, 개인 약속 후\n귀가 중 사고"
         },
         {
-          "ok": true,
-          "emoji": "🚶",
-          "label": "원래 길로 복귀 후",
-          "text": "다시 출퇴근으로 인정"
+          "ok": false,
+          "icon": "scooter",
+          "label": "범죄행위 원인",
+          "text": "킥보드·자전거\n음주운전 등"
+        },
+        {
+          "ok": false,
+          "icon": "calendar",
+          "label": "출퇴근과 무관",
+          "text": "쉬는 날\n개인 용무 이동"
         }
-      ]
+      ],
+      "caption": "「산재보험법」 제37조 제2항·제3항",
+      "capTop": 905
     },
     {
-      "type": "checklist",
+      "type": "p-detour",
+      "topic": "예외 인정",
+      "head": "장보기·병원은 [[예외]]입니다",
+      "start": {
+        "icon": "office",
+        "label": "회사"
+      },
+      "end": {
+        "icon": "home",
+        "label": "집"
+      },
+      "stop": {
+        "icon": "cart",
+        "label": "볼일 보는 중"
+      },
+      "before": "퇴근길",
+      "after": "복귀 후 다시 인정",
+      "caption": "일상생활에 필요한 행위 · 「산재보험법 시행령」 제35조",
+      "capTop": 272
+    },
+    {
+      "type": "p-grid",
       "topic": "넘어진 직후",
       "head": "이것부터 [[챙기세요]]",
       "items": [
         {
-          "emoji": "📸",
-          "label": "사고 장소 사진·CCTV 위치",
-          "text": "영상은 금방 지워져요"
+          "icon": "camera",
+          "label": "사고 장소 사진\nCCTV 위치 확인",
+          "text": "영상은 금방 지워집니다"
         },
         {
-          "emoji": "👀",
-          "label": "목격자 연락처"
+          "icon": "eye",
+          "label": "목격자\n연락처 확보",
+          "text": "동료·행인 누구든"
         },
         {
-          "emoji": "🩺",
-          "label": "첫 진료 때 '출근길 사고' 말하기",
-          "text": "초진 기록이 핵심 증거"
+          "icon": "clipboard",
+          "label": "초진 때\n'출근길 사고' 진술",
+          "text": "첫 진료기록이 핵심 증거"
         },
         {
-          "emoji": "💳",
-          "label": "교통카드 내역·지도 캡처",
+          "icon": "card",
+          "label": "교통카드 내역\n지도 캡처",
           "text": "평소 경로 증명"
         }
       ]
     },
     {
-      "type": "steps",
+      "type": "p-timeline",
       "topic": "신청 방법",
-      "head": "산재 신청, 이렇게",
+      "head": "산재 신청, [[3단계]]면 끝",
       "items": [
         {
-          "emoji": "🏥",
+          "icon": "hospital",
           "label": "치료",
           "text": "4일 이상 필요할 때"
         },
         {
-          "emoji": "📝",
-          "label": "요양급여\n신청",
-          "text": "회사 날인 불필요"
+          "icon": "form",
+          "label": "요양급여 신청",
+          "text": "근로자가 직접"
         },
         {
-          "emoji": "🏛️",
-          "label": "근로복지공단\n심사",
-          "text": "3년 안에 청구"
+          "icon": "gov",
+          "label": "공단 심사·승인",
+          "text": "근로복지공단"
         }
+      ],
+      "chips": [
+        "회사 날인 불필요",
+        "청구 기한 3년",
+        "회사 보험료 영향 없음"
       ]
     }
   ]
