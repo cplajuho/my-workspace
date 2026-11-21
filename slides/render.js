@@ -21,10 +21,13 @@ const rich = (s) => esc(s || '').replace(/\[\[(.+?)\]\]/g, '<em>$1</em>').replac
 
 const css = `
 @import url('${url('node_modules/@fontsource/noto-serif-kr/korean-900.css')}');
+@import url('${url('node_modules/@fontsource/gowun-batang/700.css')}');
+@import url('${url('node_modules/@fontsource/nanum-myeongjo/800.css')}');
 @import url('${url('node_modules/@fontsource/noto-serif-kr/korean-700.css')}');
 @font-face{font-family:Pretendard;font-weight:400;src:url('${url('node_modules/pretendard/dist/web/static/woff2/Pretendard-Regular.woff2')}')}
 @font-face{font-family:Pretendard;font-weight:500;src:url('${url('node_modules/pretendard/dist/web/static/woff2/Pretendard-Medium.woff2')}')}
 @font-face{font-family:Pretendard;font-weight:700;src:url('${url('node_modules/pretendard/dist/web/static/woff2/Pretendard-Bold.woff2')}')}
+@font-face{font-family:Pretendard;font-weight:900;src:url('${url('node_modules/pretendard/dist/web/static/woff2/Pretendard-Black.woff2')}')}
 @font-face{font-family:Pretendard;font-weight:800;src:url('${url('node_modules/pretendard/dist/web/static/woff2/Pretendard-ExtraBold.woff2')}')}
 :root{
   --ink:#1d1a16; --sub:#5b5248; --ivory:#f8f3ea; --card:#fffdf8; --line:#e6dccb;
@@ -54,6 +57,9 @@ body{font-family:Pretendard,'Noto Color Emoji',sans-serif;color:var(--ink);word-
   background:radial-gradient(circle,rgba(232,196,128,.28),transparent 65%)}
 .cover-title{position:absolute;left:72px;top:200px;width:560px;font-family:'Noto Serif KR',serif;font-weight:900;
   font-size:86px;line-height:1.24;letter-spacing:-2px;text-shadow:0 4px 18px rgba(0,0,0,.5)}
+.f-sans .cover-title{font-family:Pretendard;font-weight:900;letter-spacing:-3px;line-height:1.2}
+.f-gowun .cover-title{font-family:'Gowun Batang';font-weight:700;letter-spacing:-1.5px}
+.f-nanum .cover-title{font-family:'Nanum Myeongjo';font-weight:800;letter-spacing:-1.5px}
 .rule{width:300px;height:3px;margin:44px 0 34px;background:linear-gradient(90deg,#e3c48a,rgba(227,196,138,0))}
 .cover-sub{font-size:34px;line-height:1.55;font-weight:500;color:#eadfcc;font-family:Pretendard}
 .sig{position:absolute;left:72px;bottom:70px;font-size:28px;font-weight:700;color:#fff}
@@ -144,7 +150,7 @@ const STREAK = `<svg class="streak" viewBox="0 0 1080 1080"><defs>
 <path d="M-40 900 C 300 760, 700 640, 1120 380" stroke="url(#st)" stroke-width="2.5" fill="none"/>
 <path d="M-40 980 C 380 860, 760 760, 1120 560" stroke="url(#st)" stroke-width="1.5" fill="none" opacity=".5"/></svg>`;
 
-const darkBase = (inner) => `<div class="slide dark"><div class="panels"></div>${STREAK}<div class="glow"></div>
+const darkBase = (inner, font) => `<div class="slide dark ${font ? 'f-' + font : ''}"><div class="panels"></div>${STREAK}<div class="glow"></div>
 <img class="photo" src="${PROFILE.photo}">${inner}</div>`;
 
 const tpl = {
@@ -152,13 +158,13 @@ const tpl = {
     <div class="badge"><i></i>${esc(PROFILE.name)} · 노동법 블로그</div>
     <div class="cover-title"${d.size ? ` style="font-size:${d.size}px"` : ''}>${rich(d.title)}
       <div class="rule"></div><div class="cover-sub">${rich(d.subtitle)}</div></div>
-    <div class="sig"><small>LABOR LAW CONSULTING</small>${esc(PROFILE.name)}</div>`),
+    <div class="sig"><small>LABOR LAW CONSULTING</small>${esc(PROFILE.name)}</div>`, d.font),
 
   closing: (d) => darkBase(`
     <div class="badge"><i></i>${esc(PROFILE.name)} · 노동법 블로그</div>
     <div class="cover-title" style="top:170px">${rich(d.message || '노동문제,\n[[함께]] 풀면\n길이 보입니다.')}
       <div class="rule"></div><div class="cover-sub">${rich(d.sub || '어려운 법 조항 대신\n내 상황에 맞는 해법으로\n쉽게 안내해 드립니다.')}</div></div>
-    <div class="callbar">${PHONE_SVG}<span class="lbl">상담문의</span><span class="num">${esc(PROFILE.phone)}</span></div>`),
+    <div class="callbar">${PHONE_SVG}<span class="lbl">상담문의</span><span class="num">${esc(PROFILE.phone)}</span></div>`, d.font),
 
   statement: (d) => `<div class="disc"><span class="emo">${esc(d.emoji)}</span></div>
     <div class="head hl">${rich(d.head)}</div>${d.caption ? `<div class="cap">${rich(d.caption)}</div>` : ''}`,
@@ -208,7 +214,7 @@ async function main() {
   fs.mkdirSync(outDir, { recursive: true });
 
   const th = coverOf(spec.theme);
-  const pages = [th.cover(spec.cover), ...spec.slides.map((s, i) => contentSlide(s, i + 1)), th.closing(spec.closing || {})];
+  const pages = [th.cover(spec.cover), ...spec.slides.map((s, i) => contentSlide(s, i + 1)), th.closing({ font: spec.cover.font, ...(spec.closing || {}) })];
   const browser = await chromium.launch();
   const page = await browser.newPage({ viewport: { width: SIZE, height: SIZE }, deviceScaleFactor: spec.scale || 1 });
   for (let i = 0; i < pages.length; i++) {
