@@ -156,8 +156,8 @@ const tpl = {
 
   closing: (d) => darkBase(`
     <div class="badge"><i></i>${esc(PROFILE.name)} · 노동법 블로그</div>
-    <div class="cover-title" style="top:170px">${rich(d.message || '노동문제,\n[[혼자]] 고민하지\n마세요.')}
-      <div class="rule"></div><div class="cover-sub">${rich(d.sub || '실제 상담 경험을 바탕으로\n정확한 진단과 실무 해결책을\n함께 찾아드립니다.')}</div></div>
+    <div class="cover-title" style="top:170px">${rich(d.message || '노동문제,\n[[함께]] 풀면\n길이 보입니다.')}
+      <div class="rule"></div><div class="cover-sub">${rich(d.sub || '어려운 법 조항 대신\n내 상황에 맞는 해법으로\n쉽게 안내해 드립니다.')}</div></div>
     <div class="callbar">${PHONE_SVG}<span class="lbl">상담문의</span><span class="num">${esc(PROFILE.phone)}</span></div>`),
 
   statement: (d) => `<div class="disc"><span class="emo">${esc(d.emoji)}</span></div>
