@@ -42,12 +42,12 @@ body{font-family:Pretendard,'Noto Color Emoji',sans-serif;color:var(--ink);word-
 
 /* ---------- 어두운 브랜드 배경 (표지/마무리) ---------- */
 .dark{background:
-  radial-gradient(ellipse 70% 60% at 78% 38%,rgba(150,110,60,.35),transparent 70%),
-  radial-gradient(ellipse 60% 50% at 10% 100%,rgba(90,60,30,.35),transparent 70%),
-  linear-gradient(160deg,#15110d 0%,#0b0907 55%,#17110b 100%);color:#fff}
+  radial-gradient(ellipse 70% 60% at 78% 38%,rgba(214,170,110,.42),transparent 70%),
+  radial-gradient(ellipse 60% 50% at 10% 100%,rgba(160,115,70,.40),transparent 70%),
+  linear-gradient(160deg,#4a3828 0%,#36281c 55%,#45331f 100%);color:#fff}
 .dark .panels{position:absolute;inset:0;opacity:.18;background:
   repeating-linear-gradient(90deg,transparent 0 118px,rgba(214,176,112,.35) 118px 120px)}
-.dark .panels::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,#0b0907 0%,transparent 30%,transparent 60%,#0b0907 100%)}
+.dark .panels::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,#36281c 0%,transparent 30%,transparent 60%,#36281c 100%)}
 .dark svg.streak{position:absolute;inset:0}
 .dark em{font-style:normal;text-shadow:none;filter:drop-shadow(0 4px 14px rgba(0,0,0,.5));background:var(--goldgrad);-webkit-background-clip:text;background-clip:text;color:transparent}
 .badge{position:absolute;top:64px;left:72px;display:flex;align-items:center;gap:14px;font-size:26px;font-weight:500;color:#e8d3a6;letter-spacing:.5px}
