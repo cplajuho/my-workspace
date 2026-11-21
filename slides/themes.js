@@ -1,4 +1,4 @@
-// 표지·마무리 슬라이드 테마. spec.theme 로 고른다: 'navy'(기본) | 'light' | 'forest' | 'wine' | 'gold'(초기 시안)
+// 표지·마무리 슬라이드 테마. spec.theme 로 고른다: 'gold'(기본, render.js) | 'navy' | 'light' | 'forest' | 'wine'
 // 참고 이미지(검정·금색·명조체)와 겹치지 않도록 navy/light 는 색·배치·서체를 모두 다르게 했다.
 module.exports = ({ esc, rich, PROFILE }) => {
   const DEF_MSG = '노동문제,\n[[함께]] 풀면\n길이 보입니다.';

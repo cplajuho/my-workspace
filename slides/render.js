@@ -139,9 +139,10 @@ body{font-family:Pretendard,'Noto Color Emoji',sans-serif;color:var(--ink);word-
 .ph-text em{font-style:normal;background:var(--goldgrad);-webkit-background-clip:text;background-clip:text;color:transparent}
 `;
 
-const PHONE_SVG = `<svg viewBox="0 0 64 64" fill="none"><defs><linearGradient id="pg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbeec8"/><stop offset="1" stop-color="#b8925a"/></linearGradient></defs>
-<path d="M18 8c2 0 3.5 1 4.4 2.8l4 8c.8 1.7.5 3.6-.8 4.9l-3.2 3.2c2.6 5.4 6.9 9.7 12.3 12.3l3.2-3.2c1.3-1.3 3.2-1.6 4.9-.8l8 4c1.8.9 2.8 2.4 2.8 4.4V52c0 2.7-2.2 4.8-4.9 4.6C26.6 55.3 8.7 37.4 7.4 15.4 7.2 12.7 9.3 10.5 12 10.5z" fill="url(#pg)"/>
-<path d="M38 10c8 1.4 14.6 8 16 16M38 18c3.8.9 6.9 4 7.8 7.8" stroke="url(#pg)" stroke-width="4" stroke-linecap="round"/></svg>`;
+const PHONE_SVG = `<svg viewBox="0 0 64 64" fill="none"><defs><linearGradient id="pg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff4d6"/><stop offset=".55" stop-color="#e6c88f"/><stop offset="1" stop-color="#b8925a"/></linearGradient></defs>
+<circle cx="32" cy="32" r="31" fill="url(#pg)"/><circle cx="32" cy="32" r="27.5" stroke="#1a130d" stroke-opacity=".25" stroke-width="1"/>
+<rect x="22.5" y="13" width="19" height="38" rx="4.5" fill="#17110c"/><rect x="25.5" y="18" width="13" height="25" rx="1.5" fill="#e6c88f" opacity=".35"/>
+<rect x="29" y="15.2" width="6" height="1.4" rx=".7" fill="#e6c88f" opacity=".6"/><circle cx="32" cy="46.8" r="1.9" fill="#e6c88f" opacity=".75"/></svg>`;
 
 const STREAK = `<svg class="streak" viewBox="0 0 1080 1080"><defs>
 <linearGradient id="st" x1="0" x2="1"><stop offset="0" stop-color="#e3c48a" stop-opacity="0"/><stop offset=".55" stop-color="#f6dfa8" stop-opacity=".9"/><stop offset="1" stop-color="#e3c48a" stop-opacity="0"/></linearGradient>
@@ -150,7 +151,7 @@ const STREAK = `<svg class="streak" viewBox="0 0 1080 1080"><defs>
 <path d="M-40 900 C 300 760, 700 640, 1120 380" stroke="url(#st)" stroke-width="2.5" fill="none"/>
 <path d="M-40 980 C 380 860, 760 760, 1120 560" stroke="url(#st)" stroke-width="1.5" fill="none" opacity=".5"/></svg>`;
 
-const darkBase = (inner, font) => `<div class="slide dark ${font ? 'f-' + font : ''}"><div class="panels"></div>${STREAK}<div class="glow"></div>
+const darkBase = (inner, font = 'gowun') => `<div class="slide dark ${font === 'noto' ? '' : 'f-' + font}"><div class="panels"></div>${STREAK}<div class="glow"></div>
 <img class="photo" src="${PROFILE.photo}">${inner}</div>`;
 
 const tpl = {
@@ -203,7 +204,7 @@ function contentSlide(d, idx) {
 }
 
 const THEMES = require('./themes.js')({ esc, rich, PROFILE });
-const coverOf = (theme) => (theme === 'gold' ? tpl : THEMES[theme] || THEMES.navy);
+const coverOf = (theme) => (!theme || theme === 'gold' ? tpl : THEMES[theme] || tpl);
 
 async function main() {
   const specPath = process.argv[2];

@@ -15,9 +15,16 @@ node render.js decks/sample_퇴직금.json
 # → output/sample_퇴직금/01.png ~ 08.png
 ```
 
+## 표지·마지막 장 디자인
+
+- 기본: 검정·브라운 바탕 + 금색 포인트, 제목 글꼴 **고운바탕**, 연락처 바에 금색 원형 스마트폰 아이콘
+- `cover.font`: `gowun`(기본) · `sans`(Pretendard Black) · `nanum`(나눔명조) · `noto`(Noto Serif)
+- `theme`: 생략하면 기본 디자인. 다른 시안 `navy` · `light` · `forest` · `wine` 도 쓸 수 있다 (themes.js)
+
 ## 덱 파일(decks/*.json) 형식
 
 - `cover.title`, `cover.subtitle`: 표지 제목/부제. `[[단어]]`는 금색 강조, `\n`은 줄바꿈
+- `cover.size`: 제목 글자 크기(px). 제목이 길어 넘칠 때만 지정
 - `closing.message`, `closing.sub`: 생략하면 기본 문구 사용
 - `slides`: 중간 슬라이드 목록. `type`별 필드
 
