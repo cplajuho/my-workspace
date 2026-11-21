@@ -196,6 +196,9 @@ function contentSlide(d, idx) {
     <div class="foot"><span>${esc(PROFILE.name)}</span><span>노동법 블로그</span></div></div>`;
 }
 
+const THEMES = require('./themes.js')({ esc, rich, PROFILE });
+const coverOf = (theme) => (theme === 'gold' ? tpl : THEMES[theme] || THEMES.navy);
+
 async function main() {
   const specPath = process.argv[2];
   if (!specPath) { console.error('사용법: node render.js decks/파일.json'); process.exit(1); }
@@ -204,12 +207,13 @@ async function main() {
   const outDir = path.join(ROOT, 'output', name);
   fs.mkdirSync(outDir, { recursive: true });
 
-  const pages = [tpl.cover(spec.cover), ...spec.slides.map((s, i) => contentSlide(s, i + 1)), tpl.closing(spec.closing || {})];
+  const th = coverOf(spec.theme);
+  const pages = [th.cover(spec.cover), ...spec.slides.map((s, i) => contentSlide(s, i + 1)), th.closing(spec.closing || {})];
   const browser = await chromium.launch();
   const page = await browser.newPage({ viewport: { width: SIZE, height: SIZE }, deviceScaleFactor: spec.scale || 1 });
   for (let i = 0; i < pages.length; i++) {
     const file = path.join(outDir, `_tmp.html`);
-    fs.writeFileSync(file, `<!doctype html><html lang="ko"><head><meta charset="utf-8"><style>${css}</style></head><body>${pages[i]}</body></html>`);
+    fs.writeFileSync(file, `<!doctype html><html lang="ko"><head><meta charset="utf-8"><style>${css}${THEMES.css}</style></head><body>${pages[i]}</body></html>`);
     await page.goto('file://' + file);
     await page.evaluate(() => document.fonts.ready);
     const out = path.join(outDir, `${String(i + 1).padStart(2, '0')}.png`);
