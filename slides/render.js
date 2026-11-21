@@ -126,6 +126,7 @@ body{font-family:Pretendard,'Noto Color Emoji',sans-serif;color:var(--ink);word-
 .chk .x{font-size:40px;font-weight:700;line-height:1.3;flex:1}
 .chk .x small{display:block;font-size:28px;color:var(--sub);font-weight:500;margin-top:4px}
 .chk .box{flex:none;width:60px;height:60px;border-radius:16px;background:var(--navy);display:flex;align-items:center;justify-content:center}
+.chk .box.no{background:var(--no)}
 
 .fx{display:flex;align-items:center;justify-content:center;gap:18px;width:100%}
 .fx .p{display:flex;flex-direction:column;align-items:center;width:230px}
@@ -188,7 +189,9 @@ const tpl = {
 
   checklist: (d) => `${d.head ? `<div class="mid-head hl" style="margin-bottom:50px">${rich(d.head)}</div>` : ''}<div class="chk">${d.items.map((it) => `
     <div class="r"><span class="emo">${esc(it.emoji || '✔️')}</span><div class="x">${rich(it.label)}${it.text ? `<small>${rich(it.text)}</small>` : ''}</div>
-    <span class="box"><svg width="34" height="34" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="#f3dfae" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>`).join('')}</div>`,
+    ${d.mark === 'x'
+      ? '<span class="box no"><svg width="30" height="30" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="#fff" stroke-width="3.2" fill="none" stroke-linecap="round"/></svg></span>'
+      : '<span class="box"><svg width="34" height="34" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="#f3dfae" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>'}</div>`).join('')}</div>`,
 
   formula: (d) => `${d.head ? `<div class="mid-head hl">${rich(d.head)}</div>` : ''}<div class="fx">${d.items.map((it, i) => `
     ${i ? `<div class="op">${esc(d.ops ? d.ops[i - 1] : '×')}</div>` : ''}<div class="p ${i === d.items.length - 1 && d.resultLast ? 'res' : ''}"><div class="ic"><span class="emo">${esc(it.emoji)}</span></div><div class="l">${rich(it.label)}</div></div>`).join('')}</div>
