@@ -62,13 +62,8 @@ body{font-family:Pretendard,'Noto Color Emoji',sans-serif;color:var(--ink);word-
 .f-nanum .cover-title{font-family:'Nanum Myeongjo';font-weight:800;letter-spacing:-1.5px}
 .rule{width:300px;height:3px;margin:44px 0 34px;background:linear-gradient(90deg,#e3c48a,rgba(227,196,138,0))}
 
-/* 인물 왼쪽 · 글 오른쪽 배치 + 노무사회 로고 워터마크 */
-.dark .photo{right:auto;left:-70px;filter:drop-shadow(30px 10px 40px rgba(0,0,0,.65))}
-.dark .glow{right:auto;left:20px}
-.dark .badge,.dark .cover-title,.dark .sig{left:540px}
-.dark .cover-title{width:490px;font-size:74px}
-.dark .rule{width:260px}
-.dark .wm{position:absolute;left:520px;top:150px;width:600px;opacity:.07}
+/* 노무사회 엠블럼 워터마크: 제목 뒤 왼쪽 배경에 크게·흐리게 */
+.dark .wm{position:absolute;left:-40px;top:150px;width:600px;opacity:.07}
 .cover-sub{font-size:34px;line-height:1.55;font-weight:500;color:#eadfcc;font-family:Pretendard}
 .sig{position:absolute;left:72px;bottom:70px;font-size:28px;font-weight:700;color:#fff}
 .sig small{display:block;font-size:22px;font-weight:500;color:#c9b48c;margin-bottom:6px;letter-spacing:1px}

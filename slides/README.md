@@ -19,7 +19,7 @@ node render.js decks/sample_퇴직금.json
 
 - 기본: 검정·브라운 바탕 + 금색 포인트, 제목 글꼴 **고운바탕**, 연락처 바에 금색 원형 스마트폰 아이콘
 - `cover.font`: `gowun`(기본) · `sans`(Pretendard Black) · `nanum`(나눔명조) · `noto`(Noto Serif)
-- 인물은 왼쪽, 제목·문구는 오른쪽. 글 뒤 배경에 노무사회 엠블럼을 금색으로 크게, 흐리게(투명도 7%) 넣는다
+- 인물은 오른쪽, 제목·문구는 왼쪽. 글 뒤 배경에 노무사회 엠블럼을 금색으로 크게, 흐리게(투명도 7%) 넣는다
   (엠블럼 준비: `python3 slides/emblem.py 엠블럼원본.png` → `assets/kcplaa_emblem_gold.png`. 공식 마크라 저장소에는 올리지 않음)
 - `theme`: 생략하면 기본 디자인. 다른 시안 `navy` · `light` · `forest` · `wine` 도 쓸 수 있다 (themes.js)
 
