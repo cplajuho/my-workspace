@@ -19,6 +19,8 @@ node render.js decks/sample_퇴직금.json
 
 - 기본: 검정·브라운 바탕 + 금색 포인트, 제목 글꼴 **고운바탕**, 연락처 바에 금색 원형 스마트폰 아이콘
 - `cover.font`: `gowun`(기본) · `sans`(Pretendard Black) · `nanum`(나눔명조) · `noto`(Noto Serif)
+- 인물은 왼쪽, 제목·문구는 오른쪽. 오른쪽 아래 빈 공간에 한국공인노무사회 로고를 금색으로 흐리게 넣는다
+  (로고 준비: `python3 slides/fetch_logo.py` — 공식 홈페이지에서 받아 가공, 저장소에는 올리지 않음)
 - `theme`: 생략하면 기본 디자인. 다른 시안 `navy` · `light` · `forest` · `wine` 도 쓸 수 있다 (themes.js)
 
 ## 덱 파일(decks/*.json) 형식

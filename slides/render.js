@@ -61,6 +61,15 @@ body{font-family:Pretendard,'Noto Color Emoji',sans-serif;color:var(--ink);word-
 .f-gowun .cover-title{font-family:'Gowun Batang';font-weight:700;letter-spacing:-1.5px}
 .f-nanum .cover-title{font-family:'Nanum Myeongjo';font-weight:800;letter-spacing:-1.5px}
 .rule{width:300px;height:3px;margin:44px 0 34px;background:linear-gradient(90deg,#e3c48a,rgba(227,196,138,0))}
+
+/* 인물 왼쪽 · 글 오른쪽 배치 + 노무사회 로고 워터마크 */
+.dark .photo{right:auto;left:-70px;filter:drop-shadow(30px 10px 40px rgba(0,0,0,.65))}
+.dark .glow{right:auto;left:20px}
+.dark .badge,.dark .cover-title,.dark .sig{left:540px}
+.dark .cover-title{width:490px;font-size:74px}
+.dark .rule{width:260px}
+.dark .wm{position:absolute;left:540px;top:745px;width:470px;opacity:.2}
+.dark .wm.c{top:765px;width:440px}
 .cover-sub{font-size:34px;line-height:1.55;font-weight:500;color:#eadfcc;font-family:Pretendard}
 .sig{position:absolute;left:72px;bottom:70px;font-size:28px;font-weight:700;color:#fff}
 .sig small{display:block;font-size:22px;font-weight:500;color:#c9b48c;margin-bottom:6px;letter-spacing:1px}
@@ -151,8 +160,8 @@ const STREAK = `<svg class="streak" viewBox="0 0 1080 1080"><defs>
 <path d="M-40 900 C 300 760, 700 640, 1120 380" stroke="url(#st)" stroke-width="2.5" fill="none"/>
 <path d="M-40 980 C 380 860, 760 760, 1120 560" stroke="url(#st)" stroke-width="1.5" fill="none" opacity=".5"/></svg>`;
 
-const darkBase = (inner, font = 'gowun') => `<div class="slide dark ${font === 'noto' ? '' : 'f-' + font}"><div class="panels"></div>${STREAK}<div class="glow"></div>
-<img class="photo" src="${PROFILE.photo}">${inner}</div>`;
+const darkBase = (inner, font = 'gowun', closing = false) => `<div class="slide dark ${font === 'noto' ? '' : 'f-' + font}"><div class="panels"></div>${STREAK}<div class="glow"></div>
+<img class="wm${closing ? ' c' : ''}" src="${url('assets/kcplaa_logo_gold.png')}"><img class="photo" src="${PROFILE.photo}">${inner}</div>`;
 
 const tpl = {
   cover: (d) => darkBase(`
@@ -165,7 +174,7 @@ const tpl = {
     <div class="badge"><i></i>${esc(PROFILE.name)} · 노동법 블로그</div>
     <div class="cover-title" style="top:170px">${rich(d.message || '노동문제,\n[[함께]] 풀면\n길이 보입니다.')}
       <div class="rule"></div><div class="cover-sub">${rich(d.sub || '어려운 법 조항 대신\n내 상황에 맞는 해법으로\n쉽게 안내해 드립니다.')}</div></div>
-    <div class="callbar">${PHONE_SVG}<span class="lbl">상담문의</span><span class="num">${esc(PROFILE.phone)}</span></div>`, d.font),
+    <div class="callbar">${PHONE_SVG}<span class="lbl">상담문의</span><span class="num">${esc(PROFILE.phone)}</span></div>`, d.font, true),
 
   statement: (d) => `<div class="disc"><span class="emo">${esc(d.emoji)}</span></div>
     <div class="head hl">${rich(d.head)}</div>${d.caption ? `<div class="cap">${rich(d.caption)}</div>` : ''}`,
