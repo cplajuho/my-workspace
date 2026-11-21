@@ -1,0 +1,4 @@
+node_modules/
+output/*/_tmp.html
+assets/profile_*
+output/

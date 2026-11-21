@@ -1,0 +1,36 @@
+{
+  "name": "sample_퇴직금",
+  "cover": {
+    "title": "퇴직금,\n[[1년 미만]]이면\n못 받을까?",
+    "subtitle": "받을 수 있는 조건과 계산법을\n한눈에 정리했습니다."
+  },
+  "slides": [
+    { "type": "statement", "topic": "핵심 결론", "emoji": "💰",
+      "head": "[[1년 이상]] 일했다면\n퇴직금 받습니다", "caption": "정규직·계약직·알바 모두 같아요" },
+    { "type": "checklist", "topic": "받을 수 있는 조건", "head": "두 가지만 확인하세요",
+      "items": [
+        { "emoji": "📅", "label": "계속 근무 1년 이상", "text": "같은 회사에서 끊김 없이" },
+        { "emoji": "⏰", "label": "주 15시간 이상 근무", "text": "4주 평균으로 계산" }
+      ] },
+    { "type": "compare", "topic": "알바도 될까?", "head": "근무 형태보다 [[조건]]이 중요",
+      "items": [
+        { "ok": true, "emoji": "🧑‍🍳", "label": "주 20시간 알바", "text": "1년 이상 근무" },
+        { "ok": false, "emoji": "🕐", "label": "주 10시간 알바", "text": "주 15시간 미만" }
+      ] },
+    { "type": "formula", "topic": "계산법", "head": "퇴직금 계산, 이렇게",
+      "items": [
+        { "emoji": "💵", "label": "1일\n평균임금" },
+        { "emoji": "🗓️", "label": "30일" },
+        { "emoji": "📆", "label": "재직일수\n÷ 365" }
+      ],
+      "caption": "최근 3개월 임금이 기준이 됩니다" },
+    { "type": "number", "topic": "지급 기한", "emoji": "⏳", "pre": "퇴직 후", "value": "14", "unit": "일",
+      "caption": "이내에 지급해야 합니다\n(합의하면 연장 가능)" },
+    { "type": "steps", "topic": "못 받았다면?", "head": "이 순서로 대응하세요",
+      "items": [
+        { "emoji": "📞", "label": "회사에\n요청", "text": "문자로 기록 남기기" },
+        { "emoji": "🏛️", "label": "노동청\n진정", "text": "무료로 신청" },
+        { "emoji": "⚖️", "label": "법적\n절차", "text": "3년 안에" }
+      ] }
+  ]
+}
