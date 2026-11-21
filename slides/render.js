@@ -68,8 +68,7 @@ body{font-family:Pretendard,'Noto Color Emoji',sans-serif;color:var(--ink);word-
 .dark .badge,.dark .cover-title,.dark .sig{left:540px}
 .dark .cover-title{width:490px;font-size:74px}
 .dark .rule{width:260px}
-.dark .wm{position:absolute;left:540px;top:745px;width:470px;opacity:.2}
-.dark .wm.c{top:765px;width:440px}
+.dark .wm{position:absolute;left:520px;top:150px;width:600px;opacity:.07}
 .cover-sub{font-size:34px;line-height:1.55;font-weight:500;color:#eadfcc;font-family:Pretendard}
 .sig{position:absolute;left:72px;bottom:70px;font-size:28px;font-weight:700;color:#fff}
 .sig small{display:block;font-size:22px;font-weight:500;color:#c9b48c;margin-bottom:6px;letter-spacing:1px}
@@ -161,7 +160,7 @@ const STREAK = `<svg class="streak" viewBox="0 0 1080 1080"><defs>
 <path d="M-40 980 C 380 860, 760 760, 1120 560" stroke="url(#st)" stroke-width="1.5" fill="none" opacity=".5"/></svg>`;
 
 const darkBase = (inner, font = 'gowun', closing = false) => `<div class="slide dark ${font === 'noto' ? '' : 'f-' + font}"><div class="panels"></div>${STREAK}<div class="glow"></div>
-<img class="wm${closing ? ' c' : ''}" src="${url('assets/kcplaa_logo_gold.png')}"><img class="photo" src="${PROFILE.photo}">${inner}</div>`;
+<img class="wm" src="${url('assets/kcplaa_emblem_gold.png')}"><img class="photo" src="${PROFILE.photo}">${inner}</div>`;
 
 const tpl = {
   cover: (d) => darkBase(`
