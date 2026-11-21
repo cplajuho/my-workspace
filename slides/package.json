@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "@fontsource/noto-serif-kr": "^5.1.1",
+    "docx": "^9.5.1",
     "pretendard": "^1.3.9"
   }
 }
