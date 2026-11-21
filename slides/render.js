@@ -150,7 +150,7 @@ const darkBase = (inner) => `<div class="slide dark"><div class="panels"></div>$
 const tpl = {
   cover: (d) => darkBase(`
     <div class="badge"><i></i>${esc(PROFILE.name)} · 노동법 블로그</div>
-    <div class="cover-title">${rich(d.title)}
+    <div class="cover-title"${d.size ? ` style="font-size:${d.size}px"` : ''}>${rich(d.title)}
       <div class="rule"></div><div class="cover-sub">${rich(d.subtitle)}</div></div>
     <div class="sig"><small>LABOR LAW CONSULTING</small>${esc(PROFILE.name)}</div>`),
 
