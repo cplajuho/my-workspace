@@ -29,6 +29,20 @@ module.exports = ({ esc, rich, PROFILE, url }) => {
     shield: '<path d="M12 3l7 3v5c0 4.6-3 8-7 10-4-2-7-5.4-7-10V6z"/><path d="M8.8 12l2.2 2.2 4.2-4.4"/>',
     clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/>',
     warn: '<path d="M12 3.5 21.5 20h-19z"/><path d="M12 9.5v5M12 17.2v.3"/>',
+    coin: '<circle cx="12" cy="12" r="9"/><path d="M7.6 9l1.6 6.2L12 10l2.8 5.2L16.4 9"/><path d="M7 12h10"/>',
+    gift: '<rect x="4" y="10" width="16" height="10.5" rx="1"/><rect x="3" y="7" width="18" height="3.2" rx="1"/><path d="M12 7v13.5"/><path d="M12 7C10.6 4 7 3.8 7.4 6.2 7.6 7 9 7 12 7zM12 7c1.4-3 5-3.2 4.6-.8C16.4 7 15 7 12 7z"/>',
+    meal: '<path d="M7 3v5.5M5 3v4a2 2 0 0 0 4 0V3M7 9.5V21"/><path d="M16.5 21V3c2 1.4 3 4 3 7.5h-3"/>',
+    idcard: '<rect x="4" y="4" width="16" height="16.5" rx="2"/><circle cx="12" cy="10" r="2.6"/><path d="M7.6 17.4c.8-2 2.4-3 4.4-3s3.6 1 4.4 3"/>',
+    chart: '<path d="M3.5 20.5h17"/><rect x="5.5" y="13" width="3" height="7.5"/><rect x="10.5" y="9" width="3" height="11.5"/><rect x="15.5" y="5" width="3" height="15.5"/>',
+    users: '<circle cx="9" cy="8" r="3"/><path d="M3.5 19.5c.6-3.2 2.8-5.2 5.5-5.2s4.9 2 5.5 5.2"/><circle cx="16.6" cy="9" r="2.4"/><path d="M15.4 14.2c2.6-.3 4.6 1.4 5.2 4.3"/>',
+    scale: '<path d="M12 4v16M8 20.5h8M5 7.5h14"/><path d="M5 7.5 2.6 13a2.6 2.6 0 0 0 4.8 0zM19 7.5 16.6 13a2.6 2.6 0 0 0 4.8 0z"/><circle cx="12" cy="4" r="1"/>',
+    moon: '<path d="M19.5 14.6A8 8 0 1 1 9.4 4.5a6.4 6.4 0 0 0 10.1 10.1z"/>',
+    sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.5 1.5M17.2 17.2l1.5 1.5M5.3 18.7l1.5-1.5M17.2 6.8l1.5-1.5"/>',
+    heart: '<path d="M12 20s-7.5-4.4-7.5-10A4.3 4.3 0 0 1 12 7.4 4.3 4.3 0 0 1 19.5 10c0 5.6-7.5 10-7.5 10z"/>',
+    briefcase: '<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5h6v2M3 12.5h18"/>',
+    family: '<circle cx="7" cy="7" r="2.3"/><circle cx="17" cy="7" r="2.3"/><circle cx="12" cy="11.5" r="1.8"/><path d="M3.5 17c.4-3 1.8-5 3.5-5s3 1.2 3.4 2.6M20.5 17c-.4-3-1.8-5-3.5-5s-3 1.2-3.4 2.6M9 20c.4-2.2 1.5-3.5 3-3.5s2.6 1.3 3 3.5"/>',
+    calc: '<rect x="5" y="3" width="14" height="18" rx="2"/><rect x="8" y="6" width="8" height="3.6" rx=".6"/><path d="M8.5 13h.5M12 13h.5M15.5 13h.5M8.5 16.5h.5M12 16.5h.5M15.5 16.5h.5"/>',
+    award: '<circle cx="12" cy="9" r="5.5"/><path d="M9 13.6 7.5 21l4.5-2.5 4.5 2.5-1.5-7.4"/><path d="M10 9l1.4 1.4L14.2 7.6"/>',
     fall: '<circle cx="16.5" cy="5" r="1.9"/><path d="M15.5 8.2 10.5 11l-3.8-1.4"/><path d="M10.5 11l1.6 4-4.6 2.6"/><path d="M12.1 15l4.4 1.2 1.2 3.6"/><path d="M2.5 21h19"/>',
   };
   const icon = (n, size = 64) => `<svg class="ic" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">${P[n] || P.warn}</svg>`;
@@ -114,6 +128,63 @@ module.exports = ({ esc, rich, PROFILE, url }) => {
     font-family:'Gowun Batang';font-weight:700;font-size:28px;display:flex;align-items:center;justify-content:center}
   .pm .chips{position:absolute;left:0;right:0;top:860px;display:flex;justify-content:center;gap:18px}
   .pm .chip{padding:12px 26px;border-radius:40px;border:1px solid rgba(226,193,130,.5);font-size:23px;font-weight:700;color:#ead7ad;background:rgba(226,193,130,.07)}
+
+  /* criteria: 기준 기둥 */
+  .pm .crit{position:absolute;left:72px;right:72px;top:360px;display:flex;gap:20px}
+  .pm .pl{flex:1;position:relative;height:420px;border-radius:24px;padding:46px 14px 30px;text-align:center;
+    background:linear-gradient(180deg,rgba(255,240,210,.08),rgba(255,240,210,.015));border:1px solid rgba(226,193,130,.4)}
+  .pm .pl .ring{width:120px;height:120px;margin:0 auto 28px}
+  .pm .pl .t{font-family:'Gowun Batang';font-weight:700;font-size:36px;line-height:1.25}
+  .pm .pl .s{margin-top:14px;font-size:22px;color:#a89a85;line-height:1.4}
+  .pm .pl .bdg{position:absolute;top:-23px;left:50%;transform:translateX(-50%)}
+  .pm .pl.off{opacity:.62;border-style:dashed;border-color:rgba(190,110,90,.6);background:rgba(120,50,40,.08)}
+  .pm .pl.off .t{text-decoration:line-through;text-decoration-color:#c0644f;text-decoration-thickness:3px}
+  .pm .stamp{position:absolute;left:50%;bottom:30px;transform:translateX(-50%) rotate(-12deg);padding:8px 20px;border:3px solid #c0644f;border-radius:10px;
+    color:#e08a75;font-family:'Gowun Batang';font-weight:700;font-size:30px;letter-spacing:4px;background:rgba(20,15,11,.6)}
+
+  /* split: 포함 / 제외 두 칸 */
+  .pm .split{position:absolute;left:72px;right:72px;top:300px;display:flex;gap:28px}
+  .pm .col{flex:1;border-radius:24px;padding:26px 24px 18px;border:1px solid rgba(226,193,130,.35);background:linear-gradient(180deg,rgba(255,240,210,.07),rgba(255,240,210,.01))}
+  .pm .col.no{border-color:rgba(190,110,90,.45);background:linear-gradient(180deg,rgba(150,60,45,.10),rgba(150,60,45,.02))}
+  .pm .col .ch{display:flex;align-items:center;gap:14px;font-family:'Gowun Batang';font-weight:700;font-size:36px;padding-bottom:18px;border-bottom:1px solid rgba(226,193,130,.25);margin-bottom:6px}
+  .pm .col.no .ch{border-color:rgba(190,110,90,.3)}
+  .pm .li{display:flex;align-items:center;gap:16px;padding:15px 2px;border-bottom:1px dashed rgba(226,193,130,.14)}
+  .pm .li:last-child{border-bottom:0}
+  .pm .li .ic{flex:none}.pm .col.no .li .ic{color:#d79a86}
+  .pm .li b{display:block;font-size:25px;line-height:1.25}
+  .pm .li small{display:block;font-size:19px;color:#a89a85;margin-top:3px}
+
+  /* flow: 판단 순서도 */
+  .pm .q{position:absolute;transform:translate(-50%,-50%);display:flex;align-items:center;gap:16px;padding:22px 30px;border-radius:20px;
+    background:linear-gradient(180deg,#2e241b,#1a140f);border:1.5px solid rgba(226,193,130,.7);font-size:27px;font-weight:800;white-space:nowrap;box-shadow:0 16px 36px rgba(0,0,0,.4)}
+  .pm .q .qn{font-family:'Gowun Batang';font-weight:700;font-size:30px;color:#e2c182}
+  .pm .rs{position:absolute;transform:translate(-50%,-50%);width:360px;text-align:center;padding:20px 16px 18px;border-radius:20px;border:1px solid rgba(226,193,130,.45);background:rgba(226,193,130,.08)}
+  .pm .rs.no{border-color:rgba(190,110,90,.55);background:rgba(150,60,45,.12)}
+  .pm .rs .rt{display:flex;align-items:center;justify-content:center;gap:12px;font-size:28px;font-weight:800}
+  .pm .rs .rn{margin-top:8px;font-size:19px;color:#a89a85;line-height:1.4}
+  .pm .yn{position:absolute;transform:translate(-50%,-50%);font-size:21px;font-weight:700;padding:4px 14px;border-radius:20px;background:#17110d;border:1px solid rgba(226,193,130,.45);color:#e2c182}
+  .pm .yn.n{border-color:rgba(190,110,90,.6);color:#e08a75}
+
+  /* hub: 통상임금 중심 */
+  .pm .core{position:absolute;transform:translate(-50%,-50%);width:220px;height:220px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    background:radial-gradient(circle at 50% 35%,#f6e2b0,#c99a55 70%,#9c733c);color:#1b140e;font-family:'Gowun Batang';font-weight:700;font-size:38px;line-height:1.15;
+    box-shadow:0 0 0 12px rgba(226,193,130,.12),0 0 0 26px rgba(226,193,130,.05),0 24px 60px rgba(0,0,0,.5)}
+  .pm .core small{font-family:Pretendard;font-size:19px;font-weight:700;margin-top:6px;letter-spacing:1px}
+  .pm .sp{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center}
+  .pm .sp .lb{font-size:24px;margin-top:10px}.pm .sp .sb{font-size:18px}
+
+  /* bars: 금액 비교 */
+  .pm .bars{position:absolute;left:72px;right:72px;top:330px}
+  .pm .br{display:flex;align-items:center;gap:22px;margin-bottom:30px}
+  .pm .br .bl{width:190px;flex:none;font-size:25px;font-weight:700;color:#cdb88f;text-align:right;line-height:1.3}
+  .pm .br .bt{position:relative;height:86px;border-radius:14px;display:flex;align-items:center;justify-content:flex-end;padding-right:26px;font-size:40px;font-weight:800;letter-spacing:-.5px}
+  .pm .br .bt.lo{background:linear-gradient(90deg,rgba(226,193,130,.10),rgba(226,193,130,.22));border:1px solid rgba(226,193,130,.35);color:#e9dcc2}
+  .pm .br .bt.hi{background:linear-gradient(90deg,#8d6a37,#e9c98c);color:#1b140e;box-shadow:0 14px 34px rgba(0,0,0,.4)}
+  .pm .br .bt small{font-size:24px;font-weight:700;margin-left:4px}
+  .pm .stats{position:absolute;left:72px;right:72px;top:640px;display:flex;gap:20px}
+  .pm .stt{flex:1;border-radius:22px;padding:26px 18px;text-align:center;border:1px solid rgba(226,193,130,.35);background:linear-gradient(180deg,rgba(255,240,210,.07),rgba(255,240,210,.015))}
+  .pm .stt .v{font-family:'Gowun Batang';font-weight:700;font-size:50px;line-height:1.1}
+  .pm .stt .k{margin-top:12px;font-size:22px;color:#b4a68f;line-height:1.35}
   `;
 
   const frame = (d, i, total, inner) => `<div class="slide pm"><div class="noise"></div><div class="frame"></div>
@@ -190,6 +261,47 @@ module.exports = ({ esc, rich, PROFILE, url }) => {
       return `<svg class="lines">${xs.slice(1).map((x, i) => `<path d="M${xs[i] + 100} 505H${x - 100}" stroke="#d9b77a" stroke-width="2" stroke-dasharray="2 9" stroke-linecap="round"/><path d="M${x - 112} 497l10 8-10 8" stroke="#d9b77a" stroke-width="2" fill="none"/>`).join('')}</svg>
         <div class="tline">${d.items.map((it, i) => `<div class="st"><div class="num">${i + 1}</div>${ring(it.icon, 170)}<div class="lb" style="font-size:30px">${rich(it.label)}</div>${it.text ? `<div class="sb" style="font-size:22px">${rich(it.text)}</div>` : ''}</div>`).join('')}</div>
         ${d.chips ? `<div class="chips">${d.chips.map((c) => `<span class="chip">${rich(c)}</span>`).join('')}</div>` : ''}`;
+    },
+
+    'p-criteria': (d) => `<div class="crit">${d.items.map((it) => `<div class="pl ${it.off ? 'off' : ''}">${it.off ? '' : badge(true)}
+      ${ring(it.icon, 120, it.off)}<div class="t">${rich(it.label)}</div>${it.text ? `<div class="s">${rich(it.text)}</div>` : ''}${it.off ? `<div class="stamp">${esc(it.stamp || '폐기')}</div>` : ''}</div>`).join('')}</div>
+      ${d.caption ? `<div class="cap" style="top:${d.capTop || 830}px">${rich(d.caption)}</div>` : ''}`,
+
+    'p-split': (d) => `<div class="split">${[d.left, d.right].map((c, k) => `<div class="col ${k ? 'no' : ''}"><div class="ch">${badge(!k)}${rich(c.title)}</div>
+      ${c.items.map((it) => `<div class="li">${icon(it.icon, 44)}<div><b>${rich(it.label)}</b>${it.text ? `<small>${rich(it.text)}</small>` : ''}</div></div>`).join('')}</div>`).join('')}</div>`,
+
+    'p-flow': (d) => {
+      const q1 = [330, 335], q2 = [330, 560], rNo = [810, 335], rL = [230, 810], rR = [700, 810];
+      return `<svg class="lines"><defs><marker id="ah" markerWidth="10" markerHeight="10" refX="7" refY="5" orient="auto"><path d="M1 1l7 4-7 4" fill="none" stroke="#d9b77a" stroke-width="1.6"/></marker>
+          <marker id="ahr" markerWidth="10" markerHeight="10" refX="7" refY="5" orient="auto"><path d="M1 1l7 4-7 4" fill="none" stroke="#c0644f" stroke-width="1.6"/></marker></defs>
+        <path d="M${q1[0]} ${q1[1] + 48}V${q2[1] - 56}" stroke="#d9b77a" stroke-width="2.5" marker-end="url(#ah)"/>
+        <path d="M${q1[0] + 205} ${q1[1]}H${rNo[0] - 158}" stroke="#c0644f" stroke-width="2.5" stroke-dasharray="7 7" marker-end="url(#ahr)"/>
+        <path d="M${q2[0] - 90} ${q2[1] + 48}L${rL[0] + 20} ${rL[1] - 72}" stroke="#d9b77a" stroke-width="2.5" marker-end="url(#ah)"/>
+        <path d="M${q2[0] + 90} ${q2[1] + 48}L${rR[0] - 30} ${rR[1] - 72}" stroke="#c0644f" stroke-width="2.5" stroke-dasharray="7 7" marker-end="url(#ahr)"/></svg>
+        <div class="q" style="left:${q1[0]}px;top:${q1[1]}px"><span class="qn">Q1</span>${rich(d.q1)}</div>
+        <div class="q" style="left:${q2[0]}px;top:${q2[1]}px"><span class="qn">Q2</span>${rich(d.q2)}</div>
+        <div class="yn" style="left:${q1[0] + 40}px;top:${(q1[1] + q2[1]) / 2}px">예</div>
+        <div class="yn n" style="left:${(q1[0] + 205 + rNo[0] - 158) / 2}px;top:${q1[1] - 30}px">아니오</div>
+        <div class="yn" style="left:${(q2[0] - 90 + rL[0] + 20) / 2 - 34}px;top:${(q2[1] + 48 + rL[1] - 72) / 2}px">예</div>
+        <div class="yn n" style="left:${(q2[0] + 90 + rR[0] - 30) / 2 + 44}px;top:${(q2[1] + 48 + rR[1] - 72) / 2}px">아니오</div>
+        ${[[rNo, d.r1, false], [rL, d.r2, true], [rR, d.r3, false]].map(([p, r, ok]) => `<div class="rs ${ok ? '' : 'no'}" style="left:${p[0]}px;top:${p[1]}px${p === rNo ? ';width:300px' : ''}"><div class="rt">${badge(ok)}${rich(r.label)}</div>${r.note ? `<div class="rn">${rich(r.note)}</div>` : ''}</div>`).join('')}`;
+    },
+
+    'p-hub': (d) => {
+      const cx = 540, cy = d.cy || 615, R = d.r || 285, n = d.items.length;
+      const pts = d.items.map((_, i) => { const a = (-90 + i * 360 / n) * Math.PI / 180; return [cx + R * Math.cos(a), cy + R * Math.sin(a)]; });
+      return `<svg class="lines">${pts.map(([x, y]) => `<path d="M${cx} ${cy}L${x} ${y}" stroke="rgba(226,193,130,.4)" stroke-width="1.5" stroke-dasharray="3 7"/>`).join('')}
+          <circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="rgba(226,193,130,.12)" stroke-width="1"/></svg>
+        <div class="core" style="left:${cx}px;top:${cy}px">${rich(d.center)}${d.centerSub ? `<small>${rich(d.centerSub)}</small>` : ''}</div>
+        ${d.items.map((it, i) => `<div class="sp" style="left:${pts[i][0]}px;top:${pts[i][1] + 26}px">${ring(it.icon, 96)}<div class="lb">${rich(it.label)}</div>${it.text ? `<div class="sb">${rich(it.text)}</div>` : ''}</div>`).join('')}`;
+    },
+
+    'p-bars': (d) => {
+      const max = Math.max(...d.bars.map((b) => b.value));
+      return `<div class="bars">${d.bars.map((b) => `<div class="br"><div class="bl">${rich(b.label)}</div>
+          <div class="bt ${b.hi ? 'hi' : 'lo'}" style="width:${Math.round(b.value / max * 680)}px">${Number(b.value).toLocaleString('ko-KR')}<small>${esc(b.unit || '원')}</small></div></div>`).join('')}</div>
+        <div class="stats">${d.stats.map((st) => `<div class="stt"><div class="v gold">${rich(st.value)}</div><div class="k">${rich(st.label)}</div></div>`).join('')}</div>
+        ${d.caption ? `<div class="cap" style="top:${d.capTop || 905}px;font-size:22px">${rich(d.caption)}</div>` : ''}`;
     },
   };
 
